@@ -144,6 +144,12 @@
 \renewcommand{\abstractname}{\LARGE Abstract}
 
 %%%%%%%%symbol and function settings%%%%%%%%%
+% adjust \exists and \forall spacing
+\let\existstemp\exists
+\let\foralltemp\forall
+\renewcommand*{\exists}{\existstemp\mkern4mu}
+\renewcommand*{\forall}{\foralltemp\mkern4mu}
+
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\inpd}{\langle}{\rangle} % inner product
@@ -346,41 +352,57 @@ We recap some basic definitions and facts first:
 \end{fact}
 
 \begin{definition}
-  Let $R$ be a GCD and $P = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
-  We define the {\bf content} of $P$ as $c(P) = \gcd(a_n, \dots, a_0)$.
+  Let $R$ be a GCD and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
+  We define the {\bf content} of $f$ as $c(f) = \gcd(a_n, \dots, a_0)$.
 \end{definition}
 
 \begin{definition}
-  Let $R$ be a GCD and $P = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
-  We say that $P$ is {\bf primitive} if $c(P) = 1$.
+  Let $R$ be a GCD and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
+  We say that $f$ is {\bf primitive} if $c(f) = 1$.
 \end{definition}
 
 \begin{theorem}[Gauss's Lemma]
-  Let $R$ be a UFD and $A, B \in R[x]$ are primitive. Then $AB$
+  Let $R$ be a UFD and $f, g \in R[x]$ are primitive. Then $fg$
   is also primitive.
   \begin{proof}
     Prove by contradiction. Assume $AB$ is not primitive, then there
     exists a non-invertible element $d \in R$ dividing all coefficients of
-    $AB$. Since $R$ is a UFD, there exists an irreducible $p \in R$
+    $fg$. Since $R$ is a UFD, there exists an irreducible $p \in R$
     such that $p \mid d$. Note that $p$ is also a prime. Let $I = \gen{p}_R$.
     We know that $\quot{R}{I}$ is an integral domain $\leadsto$
     $(\quot{R}{I})[x]$ is also an integral domain.
     Consider the projection map $\tau: R[x] \to (\quot{R}{I})[x]$ (which is
-    a ring homo.), we have $0 = \tau(AB) = \tau(A)\tau(B)$. Since
-    $(\quot{R}{I})[x]$ is an integral domain, one of $\tau(A), \tau(B)$ must
+    a ring homo.), we have $0 = \tau(fg) = \tau(f)\tau(g)$. Since
+    $(\quot{R}{I})[x]$ is an integral domain, one of $\tau(f), \tau(g)$ must
     be $0$. That means $p$ divides all coefficients of $A$ or $B$, which
     is a contradiction.
   \end{proof}
 \end{theorem}
 
 \begin{theorem}
-  Let $R$ be a UFD and $F$ is the fraction field of $R$. If $P \in R[x]$
-  is reducible in $F[x]$, then $P$ is also reducible in $R[x]$.
+  Let $R$ be a UFD and $F$ is the fraction field of $R$. If $f \in R[x]$
+  is reducible in $F[x]$, then $f$ is also reducible in $R[x]$.
+
+  \begin{proof}
+    Let $f = gh$ is reducible in $F[x]$ ($\deg g, \deg h > 1$).
+    Since the coefficients of $g, h$ are elements in $F$, we can find
+    $a, b \in R$ s.t. $ag, bh \in R[x]$. Let $r = c(ag), s = c(bh)$, then
+    $g' = \frac{a}{r}g, h' = \frac{b}{s}h$ are primitive in $R[x]$.
+    Let $\alpha = \frac{rs}{ab}$, then we can write $f = \alpha g' h'$.
+    Notice that $g'h'$ is primitive $\implies ab = 1 \implies \alpha \in R$.
+    Then $f = (\alpha g')  h'$ is reducible in $R[x]$.
+  \end{proof}
 \end{theorem}
 
 \begin{remark}
-  Let $R$ be a UFD and $F$ is the fraction field of $R$. $P \in R[x]$
-  is irreducible $\iff$ $P$ is irreducible in $F[x]$ and primitive in $R[x]$.
+  Let $f \in R[x]$. If $f = f_1 f_2 \dotsm f_n$ where $f_i \in F[x],\, \forall i$.
+  Then $\exists a_1, \dots, a_n \in F$ s.t. $a_if_i \in R[x]$ and
+  $f = \prod_{i=1}^n a_i f_i$.
+\end{remark}
+
+\begin{remark}
+  Let $R$ be a UFD and $F$ is the fraction field of $R$. $f \in R[x]$
+  is irreducible $\iff$ $f$ is irreducible in $F[x]$ and primitive in $R[x]$.
 \end{remark}
 
 \begin{theorem}
@@ -388,8 +410,30 @@ We recap some basic definitions and facts first:
   \begin{proof}
     ``$\Leftarrow$'' is obvious. \\
     ``$\Rightarrow$'': Let $R$ be a UFD and $F$ is the fraction field of $R$.
+    Let $f \in R[x]$, note that $c(f) \in R$ has unique factorization,
+    we only need to check for $f$ is primitive. Also, we can assume $\deg f > 0$.
+
+    Notice that $F$ is a field, so $F[x]$ is PID $\leadsto$ UFD.
+    We can write $f = f_1f_2\dotsm f_n$ is a factorization in $F[x]$,
+    $f_i$ is irreducible in $F[x]$.
+    Then $\exists a_1, \dots, a_n \in F$ s.t.
+    $f = f_1' f_2' \dotsm f_n'$ where $f_i' = a_if_i \in R[x]$.
+    Note that $f$ is primitive $\implies$ $f_i'$ are primitive.
+    So each $f_i'$ is irreducible in $R[x]$.
+    $\implies f = f_1' f_2 \dotsm f_n'$ is a factorization in $R[x]$.
+
+    Finally, we check the uniqueness of the factorization.
+    Let $f = p_1p_2 \dotsm p_n = q_1q_2 \dotsm q_m$ where $p_i, q_j \in R[x]$.
+    Notice that any factorization in $R[x]$ is also a factorization in $F[x]$.
+    So $n = m$ and we can assume that for each $i = 1,\dots, n$,
+    $p_i = r_i q_i$ where $r_i \in F$. For each $r_i$, we can write
+    $r_i = \frac{a_i}{b_i}$ where $a_i, b_i \in R$. Then $b_i p_i = a_i q_i$.
+    Since $p_i, q_i$ are primitive, it is obvious that
+    $c(b_i p_i) = b_i, c(a_i q_i) = a_i \implies a_i = ub_i$ for some unit $u \in R$.
+    So the factorization is unique up to units.
   \end{proof}
 \end{theorem}
+
 
 \section*{Appendixes}
 
