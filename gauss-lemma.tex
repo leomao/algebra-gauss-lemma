@@ -344,20 +344,23 @@ We recap some basic definitions and facts first:
   \begin{itemize}
     \item PID implies UFD, UFD implies GCD.
     \item If $R$ is an integral domain, then $R[x]$ is also an integral domain.
+      (check the leading coefficient)
     \item Let $R$ be a ring and $I \subsetneq R$ is an ideal, then
       $I$ is a prime ideal $\iff$ $\quot{R}{I}$ is an integral domain.
-    \item Let $R$ be a ring and $p \in R$, $p$ is a prime $\iff$
+    \item Let $R$ be a ring. $p \in R$ is a prime $\iff$
       $\gen{p}_R$ is a prime ideal.
+    \item A prime element is irreducible.
+    \item In GCD domains, an irreducible element is also a prime.
   \end{itemize}
 \end{fact}
 
 \begin{definition}
-  Let $R$ be a GCD and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
+  Let $R$ be a GCD domain and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
   We define the {\bf content} of $f$ as $c(f) = \gcd(a_n, \dots, a_0)$.
 \end{definition}
 
 \begin{definition}
-  Let $R$ be a GCD and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
+  Let $R$ be a GCD domain and $f = a_nx^n + \dots + a_1x + a_0 \in R[x]$.
   We say that $f$ is {\bf primitive} if $c(f) = 1$.
 \end{definition}
 
@@ -365,19 +368,22 @@ We recap some basic definitions and facts first:
   Let $R$ be a UFD and $f, g \in R[x]$ are primitive. Then $fg$
   is also primitive.
   \begin{proof}
-    Prove by contradiction. Assume $AB$ is not primitive, then there
-    exists a non-invertible element $d \in R$ dividing all coefficients of
-    $fg$. Since $R$ is a UFD, there exists an irreducible $p \in R$
+    Prove by contradiction. Assume $fg$ is not primitive, then there
+    exists a non-invertible element $d \in R$ such that $d \mid c(fg)$.
+    Since $R$ is a UFD, there exists an irreducible $p \in R$
     such that $p \mid d$. Note that $p$ is also a prime. Let $I = \gen{p}_R$.
     We know that $\quot{R}{I}$ is an integral domain $\leadsto$
     $(\quot{R}{I})[x]$ is also an integral domain.
     Consider the projection map $\tau: R[x] \to (\quot{R}{I})[x]$ (which is
     a ring homo.), we have $0 = \tau(fg) = \tau(f)\tau(g)$. Since
     $(\quot{R}{I})[x]$ is an integral domain, one of $\tau(f), \tau(g)$ must
-    be $0$. That means $p$ divides all coefficients of $A$ or $B$, which
-    is a contradiction.
+    be $0$. That means $p$ divides $c(f)$ or $c(g)$, which is a contradiction.
   \end{proof}
 \end{theorem}
+
+\begin{remark}
+  Let $R$ be a UFD. It is obvious that $c(fg) = c(f)c(g)$ for $f, g \in R[x]$.
+\end{remark}
 
 \begin{theorem}
   Let $R$ be a UFD and $F$ is the fraction field of $R$. If $f \in R[x]$
@@ -390,52 +396,89 @@ We recap some basic definitions and facts first:
     $g' = \frac{a}{r}g, h' = \frac{b}{s}h$ are primitive in $R[x]$.
     Let $\alpha = \frac{rs}{ab}$, then we can write $f = \alpha g' h'$.
     Notice that $g'h'$ is primitive $\implies ab = 1 \implies \alpha \in R$.
-    Then $f = (\alpha g')  h'$ is reducible in $R[x]$.
+    Then $f = (\alpha g')  h'$, hence $f$ is reducible in $R[x]$.
   \end{proof}
 \end{theorem}
 
 \begin{remark}
   Let $f \in R[x]$. If $f = f_1 f_2 \dotsm f_n$ where $f_i \in F[x],\, \forall i$.
-  Then $\exists a_1, \dots, a_n \in F$ s.t. $a_if_i \in R[x]$ and
-  $f = \prod_{i=1}^n a_i f_i$.
+  Then $\exists a_1, \dots, a_n \in F$ s.t. $g_i = a_if_i \in R[x]$ and
+  $f = g_1 g_2 \dotsm g_n$.
 \end{remark}
 
 \begin{remark}
-  Let $R$ be a UFD and $F$ is the fraction field of $R$. $f \in R[x]$
+  Let $R$ be a UFD and $F$ be the fraction field of $R$. $f \in R[x]$
   is irreducible $\iff$ $f$ is irreducible in $F[x]$ and primitive in $R[x]$.
 \end{remark}
+
+\begin{coro}[Rational Root Theorem]
+  Let $f = a_n x^n + \dots + a_1 x + a_0 \in \Zb[x]$.
+  If $p/q$ is a root of $f$. Then $q \mid a_n, p \mid a_0$.
+  (Note $\gcd(p, q) = 1$)
+  \begin{proof}
+    If $p/q$ is a root of $f$. Then $f = (x - p/q)g$ for some $g \in \Qb[x]$.
+    By Gauss's lemma, $\exists a \in \Qb$ s.t. $g' = ag \in \Zb[x]$ and
+    $f = (qx - p)g'$. Then obviously $q \mid a_n, p \mid a_0$.
+  \end{proof}
+\end{coro}
 
 \begin{theorem}
   $R$ is a UFD $\iff$ $R[x]$ is a UFD.
   \begin{proof}
     ``$\Leftarrow$'' is obvious. \\
-    ``$\Rightarrow$'': Let $R$ be a UFD and $F$ is the fraction field of $R$.
-    Let $f \in R[x]$, note that $c(f) \in R$ has unique factorization,
-    we only need to check for $f$ is primitive. Also, we can assume $\deg f > 0$.
+    ``$\Rightarrow$'': Let $R$ be a UFD and $F$ be the fraction field of $R$.
+    Let $f \in R[x]$, note that $c(f) \in R$ has a unique factorization,
+    we only need to check that $f$ has a unique factorization when $f$ is primitive.
+    Also, we can assume $\deg f > 0$.
 
-    Notice that $F$ is a field, so $F[x]$ is PID $\leadsto$ UFD.
-    We can write $f = f_1f_2\dotsm f_n$ is a factorization in $F[x]$,
+    Notice that $F$ is a field, so $F[x]$ is a PID $\leadsto$ UFD.
+    We can write $f = f_1f_2\dotsm f_n$ as a factorization in $F[x]$,
     $f_i$ is irreducible in $F[x]$.
     Then $\exists a_1, \dots, a_n \in F$ s.t.
-    $f = f_1' f_2' \dotsm f_n'$ where $f_i' = a_if_i \in R[x]$.
-    Note that $f$ is primitive $\implies$ $f_i'$ are primitive.
-    So each $f_i'$ is irreducible in $R[x]$.
-    $\implies f = f_1' f_2 \dotsm f_n'$ is a factorization in $R[x]$.
+    $f = g_1 g_2 \dotsm g_n$ where $g_i = a_if_i \in R[x]$.
+    Note that $f$ is primitive $\implies$ each $g_i$ is primitive.
+    Also, $f_i$ is irreducible in $F[x]$ implies $g_i$ is also irreducible in $F[x]$.
+    So each $g_i$ is irreducible in $R[x]$.  We can conclude that 
+    $f = g_1 g_2 \dotsm g_n$ is a factorization in $R[x]$.
 
-    Finally, we check the uniqueness of the factorization.
-    Let $f = p_1p_2 \dotsm p_n = q_1q_2 \dotsm q_m$ where $p_i, q_j \in R[x]$.
+    Finally, we check the uniqueness of the factorization. Assume
+    $f = p_1p_2 \dotsm p_n = q_1q_2 \dotsm q_m$ where $p_i, q_j \in R[x]$.
     Notice that any factorization in $R[x]$ is also a factorization in $F[x]$.
     So $n = m$ and we can assume that for each $i = 1,\dots, n$,
     $p_i = r_i q_i$ where $r_i \in F$. For each $r_i$, we can write
     $r_i = \frac{a_i}{b_i}$ where $a_i, b_i \in R$. Then $b_i p_i = a_i q_i$.
     Since $p_i, q_i$ are primitive, it is obvious that
-    $c(b_i p_i) = b_i, c(a_i q_i) = a_i \implies a_i = ub_i$ for some unit $u \in R$.
-    So the factorization is unique up to units.
+    $c(b_i p_i) = b_i, c(a_i q_i) = a_i \implies a_i = u_ib_i$ for some unit $u_i \in R$.
+    $\implies p_i = u_i q_i$. So the factorization is unique up to units.
   \end{proof}
 \end{theorem}
 
+\begin{theorem}[Gauss's Lemma for GCD domains]
+  Let $R$ be a GCD and $f, g \in R[x]$. If $f, g$ are pritive, then $fg$
+  is also primitive. More generally, $c(fg) = c(f)c(g)$.
+  \begin{proof}
+    Notice that for any $f, g \in R[x]$, we have
+    $c(fg) = c(f)c(g)c(f'g')$ where $f' = \frac{1}{c(f)} f, g' = \frac{1}{c(g)} g$.
+    Clearly $f', g'$ are primitive. So we only need to prove when
+    $f, g$ are primitive.
 
-\section*{Appendixes}
+    Now we prove by induction on the total number of nonzero terms of $f$ and $g$.
+    If one of $f, g$ has at most one term, then $fg$ is primitive obviously.
+
+    Assume both $f, g$ have at least two terms.
+    Let $f = a_n x^n + \dots + a_1 x + a_0$ and
+    $g = b_m x^m + \dots + b_1 x + b_0$.
+    Assume $fg$ is not primitive, then $c(fg)$ is not invertible.
+    In particular, $c(fg) \mid a_n b_m$. Then at least one of $\gcd(c(fg), a_n), \gcd(c(fg), b_m)$
+    must be non-trivial. WLOG, assume $d = \gcd(c(fg), a_n)$ is non-trivial.
+    Then we have $s \mid c(fg)$ and $s \mid c( a_nx^n g ) \implies
+    s \mid c( (f - a_nx^n) g)$. Notice that $f - a_n x^n$ has terms fewer than
+    $f$, by induction hypothesis, $c( (f - a_nx^n) g) = c(f - a_n x^n) c(g)
+    = c(f - a_n x^n)$. Then $s \mid c(f - a_n x^n)$. But we also have $s \mid a_n$.
+    This implies $s \mid c(f)$, which is a contradiction.
+    $\implies fg$ is primitive.
+  \end{proof}
+\end{theorem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \bibliographystyle{plain}
