@@ -338,6 +338,7 @@ We recap some basic definitions and facts first:
 \begin{definition}[field of fractions]
   Let $R$ be a integral domain. The {\bf fraction field} $F$ of $R$
   is \[ F = \Set*{\frac{a}{b} \given a, b \in R, b \ne 0}. \]
+  Sometimes we also use $\text{Frac}(R)$ to denote the field of fractions.
 \end{definition}
 
 \begin{fact} \mbox{}
@@ -368,16 +369,17 @@ We recap some basic definitions and facts first:
   Let $R$ be a UFD and $f, g \in R[x]$ are primitive. Then $fg$
   is also primitive.
   \begin{proof}
-    Prove by contradiction. Assume $fg$ is not primitive, then there
-    exists a non-invertible element $d \in R$ such that $d \mid c(fg)$.
-    Since $R$ is a UFD, there exists an irreducible $p \in R$
+    Prove by contradiction. Assume $fg$ is not primitive, then
+    $\exists d \in R$ is non-invertible such that such that $d \mid c(fg)$.
+    Since $R$ is a UFD, there exists an irreducible element $p \in R$
     such that $p \mid d$. Note that $p$ is also a prime. Let $I = \gen{p}_R$.
     We know that $\quot{R}{I}$ is an integral domain $\leadsto$
     $(\quot{R}{I})[x]$ is also an integral domain.
     Consider the projection map $\tau: R[x] \to (\quot{R}{I})[x]$ (which is
     a ring homo.), we have $0 = \tau(fg) = \tau(f)\tau(g)$. Since
     $(\quot{R}{I})[x]$ is an integral domain, one of $\tau(f), \tau(g)$ must
-    be $0$. That means $p$ divides $c(f)$ or $c(g)$, which is a contradiction.
+    be $0$. This implies that $p$ divides at least one of $c(f)$ and $c(g)$,
+    which is a contradiction.
   \end{proof}
 \end{theorem}
 
@@ -386,7 +388,7 @@ We recap some basic definitions and facts first:
 \end{remark}
 
 \begin{theorem}
-  Let $R$ be a UFD and $F$ is the fraction field of $R$. If $f \in R[x]$
+  Let $R$ be a UFD with the fraction field $F$. If $f \in R[x]$
   is reducible in $F[x]$, then $f$ is also reducible in $R[x]$.
 
   \begin{proof}
@@ -407,7 +409,7 @@ We recap some basic definitions and facts first:
 \end{remark}
 
 \begin{remark}
-  Let $R$ be a UFD and $F$ be the fraction field of $R$. $f \in R[x]$
+  Let $R$ be a UFD with the fraction field $F$. $f \in R[x]$
   is irreducible $\iff$ $f$ is irreducible in $F[x]$ and primitive in $R[x]$.
 \end{remark}
 
