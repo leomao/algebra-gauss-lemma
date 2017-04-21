@@ -336,7 +336,7 @@
 We recap some basic definitions and facts first:
 
 \begin{definition}[field of fractions]
-  Let $R$ be a integral domain. The {\bf fraction field} $F$ of $R$
+  Let $R$ be an integral domain. The {\bf fraction field} of $R$
   is \[ F = \Set*{\frac{a}{b} \given a, b \in R, b \ne 0}. \]
   Sometimes we also use $\text{Frac}(R)$ to denote the field of fractions.
 \end{definition}
@@ -383,9 +383,9 @@ We recap some basic definitions and facts first:
   \end{proof}
 \end{theorem}
 
-\begin{remark}
+\begin{coro}
   Let $R$ be a UFD. It is obvious that $c(fg) = c(f)c(g)$ for $f, g \in R[x]$.
-\end{remark}
+\end{coro}
 
 \begin{theorem}
   Let $R$ be a UFD with the fraction field $F$. If $f \in R[x]$
@@ -402,18 +402,20 @@ We recap some basic definitions and facts first:
   \end{proof}
 \end{theorem}
 
-\begin{remark}
+\begin{coro}
   Let $f \in R[x]$. If $f = f_1 f_2 \dotsm f_n$ where $f_i \in F[x],\, \forall i$.
   Then $\exists a_1, \dots, a_n \in F$ s.t. $g_i = a_if_i \in R[x]$ and
   $f = g_1 g_2 \dotsm g_n$.
-\end{remark}
+  In particular, if $f$ is monic, then we can pick some $a_1,\dots, a_n$ s.t.
+  each $g_i$ is monic.
+\end{coro}
 
-\begin{remark}
+\begin{coro}
   Let $R$ be a UFD with the fraction field $F$. $f \in R[x]$
   is irreducible $\iff$ $f$ is irreducible in $F[x]$ and primitive in $R[x]$.
-\end{remark}
+\end{coro}
 
-\begin{coro}[Rational Root Theorem]
+\begin{theorem}[Rational Root Theorem]
   Let $f = a_n x^n + \dots + a_1 x + a_0 \in \Zb[x]$.
   If $p/q$ is a root of $f$. Then $q \mid a_n, p \mid a_0$.
   (Note $\gcd(p, q) = 1$)
@@ -422,7 +424,7 @@ We recap some basic definitions and facts first:
     By Gauss's lemma, $\exists a \in \Qb$ s.t. $g' = ag \in \Zb[x]$ and
     $f = (qx - p)g'$. Then obviously $q \mid a_n, p \mid a_0$.
   \end{proof}
-\end{coro}
+\end{theorem}
 
 \begin{theorem}
   $R$ is a UFD $\iff$ $R[x]$ is a UFD.
