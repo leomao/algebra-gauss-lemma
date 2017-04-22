@@ -434,9 +434,11 @@ We recap some basic definitions and facts first:
   $R$ is a UFD $\iff$ $R[x]$ is a UFD.
   \begin{proof}
     ``$\Leftarrow$'' is obvious. \\
-    ``$\Rightarrow$'': Let $R$ be a UFD and $F$ be the fraction field of $R$.
-    Let $f \in R[x]$, note that $c(f) \in R$ has a unique factorization,
-    we only need to check that $f$ has a unique factorization when $f$ is primitive.
+    ``$\Rightarrow$'': Let $R$ be a UFD with the fraction field $F$.
+    Let $f \in R[x]$, note that $c(f) \in R$ has a unique factorization
+    and we can write $f = c(f) f'$ where $f' = \frac{1}{c(f)} f \in R[x]$
+    is primitive. Here the factorization $f = c(f) f'$ is unique, so we only
+    need to check that $f$ has a unique factorization when $f$ is primitive.
     Also, we can assume $\deg f > 0$.
 
     Notice that $F$ is a field, so $F[x]$ is a PID $\leadsto$ UFD.
