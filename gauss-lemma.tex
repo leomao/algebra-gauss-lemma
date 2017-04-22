@@ -397,7 +397,7 @@ We recap some basic definitions and facts first:
     $a, b \in R$ s.t. $ag, bh \in R[x]$. Let $r = c(ag), s = c(bh)$, then
     $g' = \frac{a}{r}g, h' = \frac{b}{s}h$ are primitive in $R[x]$.
     Let $\alpha = \frac{rs}{ab}$, then we can write $f = \alpha g' h'$.
-    Notice that $g'h'$ is primitive $\implies ab = 1 \implies \alpha \in R$.
+    Notice that $g'h'$ is primitive $\implies \alpha \in R$.
     Then $f = (\alpha g')  h'$, hence $f$ is reducible in $R[x]$.
   \end{proof}
 \end{theorem}
@@ -407,6 +407,11 @@ We recap some basic definitions and facts first:
   Then $\exists a_1, \dots, a_n \in F$ s.t. $g_i = a_if_i \in R[x]$ and
   $f = g_1 g_2 \dotsm g_n$.
   In particular, when $f$ is monic, $f_i$ is monic implies $f_i \in R[x]$.
+\end{coro}
+
+\begin{coro}
+  Let $f, g \in R[x]$ and $g$ is monic. If $g$ divides $f$ in $F[x]$, then
+  it also divides $f$ in $R[x]$.
 \end{coro}
 
 \begin{coro}
