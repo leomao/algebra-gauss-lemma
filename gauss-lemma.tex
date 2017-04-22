@@ -325,7 +325,7 @@
 %%%%%%%%%%%%%%Title information%%%%%%%%%%%%%%
 \title{Gauss's Lemma}
 \author{Yao-Wen Mao}
-\date{\today}
+\date{April 24, 2017}
 
 \begin{document}
 \maketitle
@@ -406,8 +406,7 @@ We recap some basic definitions and facts first:
   Let $f \in R[x]$. If $f = f_1 f_2 \dotsm f_n$ where $f_i \in F[x],\, \forall i$.
   Then $\exists a_1, \dots, a_n \in F$ s.t. $g_i = a_if_i \in R[x]$ and
   $f = g_1 g_2 \dotsm g_n$.
-  In particular, if $f$ is monic, then we can pick some $a_1,\dots, a_n$ s.t.
-  each $g_i$ is monic.
+  In particular, when $f$ is monic, $f_i$ is monic implies $f_i \in R[x]$.
 \end{coro}
 
 \begin{coro}
@@ -452,8 +451,9 @@ We recap some basic definitions and facts first:
     $p_i = r_i q_i$ where $r_i \in F$. For each $r_i$, we can write
     $r_i = \frac{a_i}{b_i}$ where $a_i, b_i \in R$. Then $b_i p_i = a_i q_i$.
     Since $p_i, q_i$ are primitive, it is obvious that
-    $c(b_i p_i) = b_i, c(a_i q_i) = a_i \implies a_i = u_ib_i$ for some unit $u_i \in R$.
-    $\implies p_i = u_i q_i$. So the factorization is unique up to units.
+    $c(b_i p_i) = b_i, c(a_i q_i) = a_i \implies a_i = u_ib_i$ for some unit
+    $u_i \in R$.  $\implies p_i = u_i q_i$ ($R[x]$ is an integral domain).
+    So the factorization is unique up to units.
   \end{proof}
 \end{theorem}
 
@@ -463,23 +463,24 @@ We recap some basic definitions and facts first:
   \begin{proof}
     Notice that for any $f, g \in R[x]$, we have
     $c(fg) = c(f)c(g)c(f'g')$ where $f' = \frac{1}{c(f)} f, g' = \frac{1}{c(g)} g$.
-    Clearly $f', g'$ are primitive. So we only need to prove when
+    Clearly $f', g'$ are primitive. So we only need to consider the case where
     $f, g$ are primitive.
 
     Now we prove by induction on the total number of nonzero terms of $f$ and $g$.
-    If one of $f, g$ has at most one term, then $fg$ is primitive obviously.
-
+    Fist, if one of $f, g$ has only one term, then $fg$ is primitive obviously.
     Assume both $f, g$ have at least two terms.
+
     Let $f = a_n x^n + \dots + a_1 x + a_0$ and
-    $g = b_m x^m + \dots + b_1 x + b_0$.
+    $g = b_m x^m + \dots + b_1 x + b_0$ with $a_n, b_m$ are nonzero.
     Assume $fg$ is not primitive, then $c(fg)$ is not invertible.
-    In particular, $c(fg) \mid a_n b_m$. Then at least one of $\gcd(c(fg), a_n), \gcd(c(fg), b_m)$
+    In particular, $c(fg) \mid a_n b_m$. Then at least one of
+    $\gcd(c(fg), a_n), \gcd(c(fg), b_m)$
     must be non-trivial. WLOG, assume $d = \gcd(c(fg), a_n)$ is non-trivial.
-    Then we have $s \mid c(fg)$ and $s \mid c( a_nx^n g ) \implies
-    s \mid c( (f - a_nx^n) g)$. Notice that $f - a_n x^n$ has terms fewer than
+    Then we have $d \mid c(fg)$ and $d \mid c( a_nx^n g ) \implies
+    d \mid c( (f - a_nx^n) g)$. Notice that $f - a_n x^n$ has terms fewer than
     $f$, by induction hypothesis, $c( (f - a_nx^n) g) = c(f - a_n x^n) c(g)
-    = c(f - a_n x^n)$. Then $s \mid c(f - a_n x^n)$. But we also have $s \mid a_n$.
-    This implies $s \mid c(f)$, which is a contradiction.
+    = c(f - a_n x^n)$. Then $d \mid c(f - a_n x^n)$. But we also have $d \mid a_n$.
+    This implies $d \mid c(f)$, which is a contradiction.
     $\implies fg$ is primitive.
   \end{proof}
 \end{theorem}
